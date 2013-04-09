@@ -41,7 +41,7 @@ function getSubRedditData(e) {
 			dataSource: data.data.children,
 			template: $("#subreddit-data-template").html(),
             style: "inset"
-		}).data("kendoMobileListView");
+		});
     });
 }
 
@@ -68,7 +68,9 @@ function addSubReddit() {
     if ($("#txtNew").val().length == 0) return;
     sqlite.insertRecord($("#txtNew").val());
     $("#txtNew").val("");
-    app.navigate("#home");
+    // refresh our listview with the new data
+    var listView = $("#subreddit-list").data("kendoMobileListView");
+    listView.refresh();
 }
 
 function removeSubReddit(e) {
